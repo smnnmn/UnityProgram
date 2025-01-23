@@ -5,13 +5,28 @@ using UnityEngine;
 public class CreateManager : MonoBehaviour
 {
     [SerializeField] GameObject unit;
+    [SerializeField] Transform[] transformList;
+    [SerializeField] float createTime = 3;
     private GameObject clone;
+    private float time;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        clone = Instantiate(unit);
+        time += Time.deltaTime;
 
-        clone.transform.position = new Vector3(0, 0, -5);
+        if(time >= createTime)
+        {
+            Create();
+            time = 0;
+        }
+    }
+
+    private void Create()
+    {
+        if(clone == null)
+        {
+            clone = Instantiate(unit, transformList[Random.Range(0, transformList.Length)]);
+
+        }
     }
 }
