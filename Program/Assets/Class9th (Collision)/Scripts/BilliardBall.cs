@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BilliardBall : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+    private Rigidbody rigid;
     [SerializeField] Vector3 direction;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigid = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -26,7 +26,7 @@ public class BilliardBall : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rigidbody.AddForce(direction, ForceMode.Impulse);
+        rigid.AddForce(direction, ForceMode.Impulse);
 
         // ForceMode.Force : 지속적인 힘을 적용하는 방식이며,
         // 객체에 힘을 계속적으로 전달하는
@@ -45,7 +45,11 @@ public class BilliardBall : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        if(damageable != null)
+        {
+            damageable.Use();
+        }
         Debug.Log("OnCollisionEnter");
     }
     private void OnCollisionStay(Collision collision)
