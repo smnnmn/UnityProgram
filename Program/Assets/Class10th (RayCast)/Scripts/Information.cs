@@ -11,6 +11,7 @@ public class Information : MonoBehaviour
 
     private Text titleText;
     private Text descriptionText;
+
     // Start is called before the first frame update
     private void Awake()
     {
