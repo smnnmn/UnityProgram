@@ -6,6 +6,7 @@ public class Picking : MonoBehaviour
 {
     private Ray ray;
     private RaycastHit rayCastHit;
+    [SerializeField] LayerMask layerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class Picking : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out rayCastHit, Mathf.Infinity))
+            if(Physics.Raycast(ray, out rayCastHit, Mathf.Infinity,layerMask))
             {
                 rayCastHit.transform.GetComponent<View>().Show();
             }
