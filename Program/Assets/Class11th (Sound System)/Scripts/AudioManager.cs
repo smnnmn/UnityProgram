@@ -6,7 +6,22 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
 
-    public void Listen(AudioClip audioClip)
+    private static AudioManager instance;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public  void Listen(AudioClip audioClip)
     {
         audioSource.PlayOneShot(audioClip);
     }
