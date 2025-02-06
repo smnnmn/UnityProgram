@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -7,6 +8,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
 
     private static AudioManager instance;
+
+    public static AudioManager Instance { get { return instance; } }
 
     private void Awake()
     {
@@ -18,7 +21,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     public  void Listen(AudioClip audioClip)
